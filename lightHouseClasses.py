@@ -7,21 +7,26 @@ import matplotlib.pyplot as plt
 
 class Runner:
     def __init__(self, adj, dyn): 
+        shape = adj.shape
+        dim = shape[0]
 
-        self.dyn_vars = np.zeros(adj.shape()[0]) # this assums that adj is a numpy array 
+        self.dyn_vars = np.zeros(dim) # this assums that adj is a numpy array 
         self.dyn_hist = {} 
         self.dyn = dyn
         self.dyn.set_adj(adj)
         pass
     
     def run_n_steps(self, start = None, n = 10): 
-        if not start: 
-            self.dyn_var = start # should also add in some type checking here 
-        self.dyn_hist[0] = self.dyn_var  
+        if start: 
+            self.dyn_vars = start # should also add in some type checking here 
+        self.dyn_hist[0] = self.dyn_vars
         # note that at the moment the history is not reset in anyway. THis might be a problem 
         for i in range(n): 
+            print('lhc' , self.dyn_vars)
 
-            self.dyn_var = self.dyn(self.dyn_var)
+            # self.dyn_vars = self.dyn(self.dyn_vars)
+            x = self.dyn(self.dyn_vars)
+            print('lhc ?' , x)
             self.dyn_hist[i] = self.dyn_vars
             
         return self.dyn_hist
@@ -29,8 +34,8 @@ class Runner:
 class DynRandomiser: 
     # the reason this class exists is to combine a structural dynamic with a particular kind of randomness. i.e if we want to replace a bernoulli 
     # random variable with normal without having to re- code everything. So we also need functions which take randomness and adjacency as argumetns
-    def __init__(self, Rand, dyn):
-        self.rand = Rand # idea is this function takes either takes a vector and adds our randomness to it or takes an individual edge and adds randomness to it 
+    def __init__(self,noise, dyn):
+        self.rand = noise # idea is this function takes either takes a vector and adds our randomness to it or takes an individual edge and adds randomness to it 
         self.dynamic = dyn
         self.adj = 'unset'
 
