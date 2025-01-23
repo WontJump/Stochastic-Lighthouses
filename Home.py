@@ -14,6 +14,6 @@ adj = np.array([
 
 dyn = lhc.DynRandomiser(dy.random_walk_noise, dy.lighthouses)
 runner = lhc.Runner(adj,dyn)
-print(runner.run_n_steps())
+data = runner.run_n_steps(n = 100000)
 
-
+stat.sum_of_all_dynamics_plot(data)
