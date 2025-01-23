@@ -3,6 +3,8 @@ from typing import Any
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
 def all_edges_plot(data):
     # Extract t values (keys)
     t_values = list(data.keys())
@@ -66,6 +68,45 @@ def absolute_sum_plot(data):
 
     # Title of the plot
     plt.title('Line Plot of y vs. t')
+
+    # Show the plot
+    plt.show() 
+    pass   
+
+
+def sum_scaled_dynamics_plot(data, k):
+    t_values = list(data.keys())
+    y_values = list(data.values())
+    y_values = [(1/k)*np.sum(i) for i in y_values]
+
+    # Create a line plot
+    plt.plot(t_values, y_values)
+
+    # Label the axes
+    plt.xlabel('t')  # x-axis label (Independent variable)
+    plt.ylabel('y')  # y-axis label (Dependent variable)
+
+    # Title of the plot
+    plt.title('scaled Line Plot of y vs. t')
+
+    # Show the plot
+    plt.show() 
+    pass
+
+def absolute_scaled_sum_plot(data,k): 
+    t_values = list(data.keys())
+    y_values = list(data.values())
+    y_values = [(1/k)*np.sum(np.abs(i)) for i in y_values]
+
+    # Create a line plot
+    plt.plot(t_values, y_values)
+
+    # Label the axes
+    plt.xlabel('t')  # x-axis label (Independent variable)
+    plt.ylabel('y')  # y-axis label (Dependent variable)
+
+    # Title of the plot
+    plt.title('Scalded absolute Line Plot of y vs. t')
 
     # Show the plot
     plt.show() 
