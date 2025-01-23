@@ -22,11 +22,7 @@ class Runner:
         self.dyn_hist[0] = self.dyn_vars
         # note that at the moment the history is not reset in anyway. THis might be a problem 
         for i in range(n): 
-            print('lhc' , self.dyn_vars)
-
-            # self.dyn_vars = self.dyn(self.dyn_vars)
-            x = self.dyn(self.dyn_vars)
-            print('lhc ?' , x)
+            self.dyn_vars = self.dyn(self.dyn_vars)
             self.dyn_hist[i] = self.dyn_vars
             
         return self.dyn_hist
@@ -37,7 +33,7 @@ class DynRandomiser:
     def __init__(self,noise, dyn):
         self.rand = noise # idea is this function takes either takes a vector and adds our randomness to it or takes an individual edge and adds randomness to it 
         self.dynamic = dyn
-        self.adj = 'unset'
+        self.adj = 'Unset'
 
     def set_adj(self, Adj): 
         self.adj = Adj
@@ -45,4 +41,4 @@ class DynRandomiser:
  
     def __call__(self, var):  # this is the thing I want to make into a lambda function thingy 
     # i.e I need it to be able to set Adj forever with a single call?
-        self.dynamic(self.adj,self.rand, var)
+        return self.dynamic(self.adj,self.rand, var)

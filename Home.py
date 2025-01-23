@@ -14,4 +14,6 @@ adj = np.array([
 
 dyn = lhc.DynRandomiser(dy.random_walk_noise, dy.lighthouses)
 runner = lhc.Runner(adj,dyn)
-runner.run_n_steps()
+print(runner.run_n_steps())
+
+

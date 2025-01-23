@@ -7,7 +7,6 @@ import numpy as np
 def lighthouses(Adj, noise,  var_t1): 
     var_t2 =np.zeros(var_t1.shape) 
 
-    print(var_t2)
 
     for i in range(var_t1.shape[0]): 
         column_i = Adj[:, i]
@@ -15,9 +14,7 @@ def lighthouses(Adj, noise,  var_t1):
         degree = np.sum(column_i) 
         var_t2[i] = 1/degree * dot_product 
     
-    print(var_t2)
-    # return var_t2
-    return 1
+    return var_t2
 
 def random_walk_noise(var): 
     dim = var.shape[0]

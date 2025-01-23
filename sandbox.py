@@ -1,1 +1,4 @@
-print((4,3)[0])
+def foo(bar): 
+    return bar 
+
+print(foo('bar'))
