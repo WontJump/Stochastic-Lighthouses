@@ -4,6 +4,7 @@ import statistics_1 as stat
 import numpy as np
 
 
+
 adj = np.array([
     [0, 1, 0],
     [1, 0, 1],
@@ -29,10 +30,24 @@ def adjChain(n):
     
     return adj_matrix
 
+def star_adjacency_matrix(n):
+    # Create an empty adjacency matrix of size (n+1) x (n+1)
+    adj_matrix = np.zeros((n+1, n+1), dtype=int)
+    
+    # Connect the central vertex (vertex 0) to all other vertices
+    for i in range(1, n+1):
+        adj_matrix[0, i] = 1
+        adj_matrix[i, 0] = 1
+
+    
+    return adj_matrix
+
 
 
 dyn = lhc.DynRandomiser(dy.random_walk_noise, dy.lighthouses)
-runner = lhc.Runner(adjChain(50),dyn)
+runner = lhc.Runner(completeAdj(5),dyn)
 data = runner.run_n_steps(n = 100000)
 
-stat.sum_scaled_dynamics_plot(data, k = 50)
+# stat.pdf_scaled_edges_plot(data, save_to_pdf= True)
+
+stat.max_dif_dynamics_plot(data)
