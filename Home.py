@@ -43,10 +43,21 @@ def star_adjacency_matrix(n):
     return adj_matrix
 
 
+def adjacency_matrix_cycle(n):
+    # Initialize an n x n matrix of zeros
+    adj_matrix = np.zeros((n, n), dtype=int)
+    
+    # For a cycle, connect each node to the next, and the last to the first
+    for i in range(n):
+        adj_matrix[i, (i + 1) % n] = 1  # Connect to the next node (circular)
+        adj_matrix[(i + 1) % n, i] = 1  # Ensure the graph is undirected
+    
+    return adj_matrix
+
 
 dyn = lhc.DynRandomiser(dy.random_walk_noise, dy.lighthouses)
-runner = lhc.Runner(completeAdj(5),dyn)
-data = runner.run_n_steps(n = 100000)
+runner = lhc.Runner(star_adjacency_matrix(500),dyn)
+data = runner.run_n_steps(n = 10000)
 
 # stat.pdf_scaled_edges_plot(data, save_to_pdf= True)
 

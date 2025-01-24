@@ -7,4 +7,6 @@
 
 - trying to find ways to analyse time series data 
 - sadly this isn't stationary data 
-- 
+
+
+- from just playin around I've noticed that the star has a very small max dif but also its min path distance between any two points is only 2 . that would suggest ...
